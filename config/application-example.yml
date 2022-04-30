@@ -72,6 +72,8 @@ http:
     accept:
       timeout: 43200000
 
-admin_token: xxxxxxxx
+admin_token: xxxx
 engineUrl: "http://127.0.0.1:9004"
 notebookUrl: "http://127.0.0.1:9006"
+notebookAccessToken: "bearer xxxxx"
+domain: "http://127.0.0.1:3000"

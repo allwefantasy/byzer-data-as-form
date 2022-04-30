@@ -1,10 +1,10 @@
 # Byzer Data as Form
 
-Byzer Data as Form 是一款以 Form 管理和使用，配合 通过 [Byzer社区](https://byzer.org/) 的 
+Byzer Data as Form 是一款 Form 管理和使用产品，该产品需要配合 [Byzer社区](https://byzer.org/) 的 
 [Byzer Notebook](https://docs.byzer.org/#/byzer-notebook/zh-cn/)/[Byzer-lang](https://github.com/byzer-org/byzer-lang)
-制作 Form。
+制作 Form后 然后发布到该产品中。
 
-该产品的使命是 *** Help People Deliver Data Value ***。
+Byzer Data as Form 的使命是 **Help People Deliver Data Value**。
 
 ## 部署
 
@@ -18,9 +18,10 @@ config 目录下的 `application-example.yml` 改成  `application.yml`。值得
 
 1. 数据库链接需要改动
 2. admin_token 需要在配置文件里配置，请随机生成一个 UUID。
-3. storage 需要配置一个路径，用于存放 插件文件以及图片文件。
-4. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接
-5. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
+3. notebookAccessToken 是为了让该应用能够访问 Byzer Notebook
+4. storage 需要配置一个路径，用于存放 插件文件以及图片文件。
+5. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接
+6. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
 
 ### 项目打包
 
