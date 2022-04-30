@@ -124,6 +124,62 @@ and  receive=${trackingType}
 as output;
 ```
 
+第一行变量是设置表单可访问性的，也就是我们设计的表单谁可以访问，我们后续会有详细章节介绍可见性设置。 当其值为 `__PUBLIC__`  时，表示所有 Data-as-Form 平台的用户都可以访问到你的表单。
+如果你只希望特定用户使用呢？
+                   
+```
+set FORM_VISIBILITY = "user:jack";
+```
+
+
+多个用户可以使用逗号分隔。比如 `user:jack,william`
+
+如果只希望某个 team 下的某个 role 使用：
+
+```
+set FORM_VISIBILITY = "team:byzer > role:dev";
+```
+
+同一组下的多个 role:
+
+```
+set FORM_VISIBILITY = "team:byzer > role:dev, team:byzer > role:admin";
+```
+
+不同组的不同 role:
+
+```
+set FORM_VISIBILITY = "team:byzer > role:dev, team:kylin > role:admin";
+```
+
+
+表单类型截止目前支持：
+
+1. Input
+2. Select
+
+其他的表单类型我们会持续增加。
+其中 Select 支持下拉列表的静态配置和动态配置：
+
+1. textProvider  如前文中的   textProvider="接受,发送;0,1";
+2.  sqlProvider  比如从数据库表中动态加载下拉选项框。
+
+sqlProvider的一个示例用法：
+       
+```sql
+set trackingType="0" where 
+type="defaultParam" 
+and formType="select" 
+and label="快递类型" 
+and sqlProvider='''
+select "接受" as key, 0 as value 
+union select "发送" as key, 1 as value 
+as output;
+''';
+```
+
+上面的代码可以达到和静态配置一样的效果。
+
 开发完成后，记录下该 notebook的 id, 假设为 48, 此时可以进 Data As Form 平台上进行表单发布，先登录。
 
 ![](./images/img_6.png)
@@ -134,6 +190,8 @@ as output;
 ![](./images/img_7.png)
 
 填写表单的一些信息，该表单就会出现在主界面。
+
+
 
 
 
