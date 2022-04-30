@@ -1,10 +1,11 @@
 # Byzer Data as Form
 
 Byzer Data as Form 是一款集 Form 发布，管理和使用的 产品，该产品需要配合 [Byzer社区](https://byzer.org/) 的 
-[Byzer Notebook](https://docs.byzer.org/#/byzer-notebook/zh-cn/)/[Byzer-lang](https://github.com/byzer-org/byzer-lang)
+[Byzer Notebook](https://docs.byzer.org/#/byzer-notebook/zh-cn/) / [Byzer-lang](https://github.com/byzer-org/byzer-lang)
 ，在 Byzer Notebook 中使用  Byzer-lang 制作 Form 后 然后发布到该产品中。
 
 Byzer Data as Form 的使命是 **Help People Deliver Data Value**。
+
 
 ## 部署
 
