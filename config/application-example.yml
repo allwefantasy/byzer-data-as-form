@@ -1,0 +1,77 @@
+mode:
+  development
+
+
+development:
+  datasources:
+    mysql:
+      host: 127.0.0.1
+      port: 3306
+      database: byzer_extension_market
+      username: xxxxx
+      password: xxxxx
+      initialSize: 8
+      disable: false
+      removeAbandoned: true
+      testWhileIdle: true
+      removeAbandonedTimeout: 30
+      maxWait: 100
+      filters: stat,log4j
+    mongodb:
+      disable: true
+    redis:
+      disable: true
+test:
+  datasources:
+    mysql:
+      host: 127.0.0.1
+      port: 3306
+      database: xxxxx
+      username: xxxxx
+      password: xxxxx
+      disable: true
+
+production:
+  datasources:
+    mysql:
+      host: 127.0.0.1
+      port: 3306
+      database: xxxxx
+      username: xxxxx
+      password: xxxxx
+      disable: true
+
+
+application:
+  controller: tech.mlsql.serviceframework.platform.action
+  model: serviceframework.platform.model
+  static:
+    enable: true
+  template:
+    engine:
+      enable: true
+
+serviceframework:
+  template:
+    loader:
+      classpath:
+        enable: false
+  static:
+    loader:
+      classpath:
+        enable: false
+        dir: "assets"
+###############http config##################
+http:
+  port: 9007
+  disable: false
+  host: 0.0.0.0
+  server:
+    idleTimeout: 6000000
+  client:
+    accept:
+      timeout: 43200000
+
+admin_token: xxxxxxxx
+engineUrl: "http://127.0.0.1:9004"
+notebookUrl: "http://127.0.0.1:9006"

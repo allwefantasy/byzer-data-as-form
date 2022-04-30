@@ -1,0 +1,1 @@
+java -cp .:lib/* tech.mlsql.app_runtime.plugin.App
