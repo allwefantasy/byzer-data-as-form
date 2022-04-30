@@ -25,6 +25,8 @@ config 目录下的 `application-example.yml` 改成  `application.yml`。值得
 6. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
 
 ### 项目打包
+          
+> 因为项目还在积极开发中，我们需要使用最新基于 master 分支的依赖，请手动下面列出的依赖。
 
 下载如下项目依赖：
 
