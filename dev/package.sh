@@ -15,8 +15,8 @@ VERSION=$(mvn -q \
     --non-recursive \
     exec:exec)
 
-mvn clean install -DskipTests
-mvn clean package -DskipTests -Pshade -pl ${v}-bin
+mvn clean install -DskipTests -Dmaven.javadoc.skip=true
+mvn clean package -DskipTests -Dmaven.javadoc.skip=true -Pshade -pl ${v}-bin
 
 mkdir -p release/${v}-bin/lib release/${v}-bin/bin
 cp -r config release/${v}-bin/
