@@ -29,7 +29,7 @@ object FormUtils {
           case None =>
             val sql = field.option.get("sqlProvider").get
             val runScript = new RunScript(Map())
-            val content = runScript.owner("robot").sql(sql).execute()
+            val content = runScript.includeSchema(false).owner("robot").sql(sql).execute()
             JSONTool.jParseJsonArray(content).asScala.map { item =>
               (item.asInstanceOf[JSONObject].get("key").toString, item.asInstanceOf[JSONObject].get("value").toString)
             }.foreach { case (k, v) =>
