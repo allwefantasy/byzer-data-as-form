@@ -7,7 +7,7 @@ Byzer Data as Form 是一款集 Form 发布，管理和使用的 产品。
 
 ## 在线体验（需要保证外网访问速度）
 
-http://docs.byzer.org/form
+https://byzer.org/form
 
 ## 部署
 
