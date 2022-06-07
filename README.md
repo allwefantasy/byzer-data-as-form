@@ -54,7 +54,7 @@ cd byzer-data-as-form
 
 一个填写例子：
 
-![](./images/img_2.png)
+![](./images/7.png)
 
 此时项目主页应该是可以正常显示了,显示的内容如下：
 
