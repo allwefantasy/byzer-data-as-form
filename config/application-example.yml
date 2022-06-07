@@ -72,8 +72,14 @@ http:
     accept:
       timeout: 43200000
 
-admin_token: xxxx
+admin_token: xxxxxxxxx
 engineUrl: "http://127.0.0.1:9004"
 notebookUrl: "http://127.0.0.1:9006"
-notebookAccessToken: "bearer xxxxx"
+notebookAccessToken: "bearer xxxx"
 domain: "http://127.0.0.1:3000"
+webplatform:
+  user:
+    activate_by_default: true
+web:
+  static:
+    dir: "file:///Users/allwefantasy/web"
