@@ -22,6 +22,7 @@ https://byzer.org/form
 
 ```
 git clone https://github.com/allwefantasy/byzer-data-as-form
+cd byzer-data-as-form
 ./dev/package.sh
 ```
 
