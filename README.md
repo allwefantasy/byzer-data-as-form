@@ -1,21 +1,34 @@
 # Byzer Data as Form
 
-Byzer Data as Form 是一款集 Form 发布，管理和使用的 产品，该产品需要配合 [Byzer社区](https://byzer.org/) 的 
-[Byzer Notebook](https://docs.byzer.org/#/byzer-notebook/zh-cn/) / [Byzer-lang](https://github.com/byzer-org/byzer-lang)
-，在 Byzer Notebook 中使用  Byzer-lang 制作 Form 后 然后发布到该产品中。
+Byzer Data as Form 是一款集 Form 发布，管理和使用的 产品。
+他的使命是 **Help People Deliver Data Value**。
 
-Byzer Data as Form 的使命是 **Help People Deliver Data Value**。
+> [传递数据的价值- Byzer Data-as-Form](https://zhuanlan.zhihu.com/p/516070378)
 
+## 在线体验（需要保证外网访问速度）
+
+http://docs.byzer.org/form
 
 ## 部署
 
 ### 前置条件
+1. [部署 Byzer 语言引擎](https://docs.byzer.org/#/byzer-lang/zh-cn/installation/README)
+2. [部署 Byzer Notebook](https://docs.byzer.org/#/byzer-notebook/zh-cn/installation/prerequisites) 
+3. 初始化 MySQL 数据库(最好是5.7版本的)，数据库 schema 在根目录下的 db/db.sql
 
-1. 需要提前安装 MySQL 数据库 (项目根目录下的 db/db.sql 为库表结构)
+### 项目打包
+
+运行根项目下的脚本（请确保 github 访问顺畅）：
+
+```
+git clone https://github.com/allwefantasy/byzer-data-as-form
+./dev/package.sh
+```
 
 ### 配置文件
+      
 
-config 目录下的 `application-example.yml` 改成  `application.yml`。值得注意的配置：
+将 release/config 目录下的 `application-example.yml` 改成  `application.yml`。值得注意的配置：
 
 1. 数据库链接需要改动
 2. admin_token 需要在配置文件里配置，请随机生成一个 UUID。
@@ -24,33 +37,9 @@ config 目录下的 `application-example.yml` 改成  `application.yml`。值得
 5. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接
 6. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
 
-### 项目打包
-          
-> 因为项目还在积极开发中，我们需要使用最新基于 master 分支的依赖，请手动下面列出的依赖。
-
-下载如下项目依赖：
-
-1. https://github.com/allwefantasy/web-platform
-2. https://github.com/allwefantasy/app_runtime_with_db
-3. http://github.com/allwefantasy/user-system
-4. http://github.com/allwefantasy/ar_runtime_web_console
-
-分别执行：
-
-```
-mvn -DskipTests  install
-```
-
-然后运行根项目下的脚本：
-
-```
-./dev/package.sh
-```
-
 ### 项目启动
 
 在 release 目录的发行版里，运行 `./bin/start.sh` 进行启动。
-
 
 启动后访问：`http://127.0.0.1:9007/web/#/api/list`查看界面。
 

@@ -1,10 +1,31 @@
+#!/usr/bin/env bash
 
-v=${1}
+v=${1:-byzer-data-as-form}
 
 if [[ "${v}" == "" ]]
 then
   echo "module name is required"
   exit 1
+fi
+
+DATA_AS_FORM_HOME = `pwd`
+
+if [[ ! -d deps ]]
+then
+  mkdir -p  deps
+  cd deps
+
+  for item in web-platform app_runtime_with_db user-system ar_runtime_web_console
+  do
+      echo "clone https://github.com/allwefantasy/${item}"
+      git clone https://github.com/allwefantasy/${item}
+      echo "installing ${item}"
+      cd "$item"
+      mvn -DskipTests  install
+      cd ..
+  done
+
+  cd ${DATA_AS_FORM_HOME}
 fi
 
 rm -rf release
