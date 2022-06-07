@@ -38,6 +38,39 @@ cd byzer-data-as-form
 5. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接
 6. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
 
+### 关于 notebookAccessToken 参数的特别说明
+
+> 现阶段为了能够访问 Byzer Notebook ，用户还需要自己编译 Byzer Notebook。
+> 在 Byzer Notebook项目中执行 `./build/package.sh` 即可打包。然后参考 [安装文档](https://docs.byzer.org/#/byzer-notebook/zh-cn/installation/install_uninstall)
+> 启动
+
+用户需要获取 Byzer Notebook 配置文件 `config/notebook.properties` 中的
+`notebook.security.key`配置, 然后使用 release/byzer-data-as-form-bin 
+目录下的 `./bin/gen-token` 脚本进行 Token 生成：
+
+```
+./bin/gen-token.sh xxxxxxxxxxx
+```
+
+界面会输出类似这样的字符串：
+
+```
+token generated:
+ eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTQ2MTM2MTEsIm5hbWUiOiJhZG1pbiJ9.oNXyjmYVd0S64I2-EIXOu5BtjD3TgAYktFLAmPFlFR8
+```
+
+复制最后一行，然后在 release/byzer-data-as-form-bin 下的 config/application.yml 中进行配置：
+
+```
+notebookAccessToken: "bear ereyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTQ2MTM2MTEsIm5hbWUiOiJhZG1pbiJ9.oNXyjmYVd0S64I2-EIXOu5BtjD3TgAYktFLAmPFlFR8"
+```
+
+> 注意前面有 bear+空格前缀
+
+这样 Byzer Data as Form 才能访问 Byzer Notebook
+
+
+
 ### 项目启动
 
 在 release 目录的发行版里，运行 `./bin/start.sh` 进行启动。
