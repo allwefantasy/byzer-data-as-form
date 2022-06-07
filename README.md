@@ -48,7 +48,7 @@ cd byzer-data-as-form
 
 首先我们填写网站信息：
 
-可以通过地址： http://127.0.0.1:9007/#/api/list 查看所有可用的API。 我们第一步是使用/config/home API 对站点进行配置
+可以通过地址： http://127.0.0.1:9007/web/#/api/list 查看所有可用的API。 我们第一步是使用/config/home API 对站点进行配置
 
 ![](./images/img.png)
 
