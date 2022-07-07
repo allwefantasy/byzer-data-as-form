@@ -34,18 +34,18 @@ cd byzer-data-as-form
 1. 数据库链接需要改动
 2. admin_token 需要在配置文件里配置，请随机生成一个 UUID。
 3. notebookAccessToken 是为了让该应用能够访问 Byzer Notebook
-4. storage 需要配置一个路径，用于存放 插件文件以及图片文件。
-5. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接
-6. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
+4. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接。如果是IP的话，应该是类似这样的配置： `http://192.168.3.14:9111`
+5. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
+6. web.static.dir  配置静态文件的目录。 用户需要将 [web](https://github.com/allwefantasy/ar_runtime_web_console/tree/master/ar_runtime_web_console-lib/src/main/resources/ar_runtime_web_console/web)里的文件拷贝到这个目录里来。  
+7. storage 需要配置一个路径，用于存放 插件文件以及图片文件。 请喝 web.static.dir 保持一致
 
 ### 关于 notebookAccessToken 参数的特别说明
 
-> 现阶段为了能够访问 Byzer Notebook ，用户还需要自己编译 Byzer Notebook。
-> 在 Byzer Notebook项目中执行 `./build/package.sh` 即可打包。然后参考 [安装文档](https://docs.byzer.org/#/byzer-notebook/zh-cn/installation/install_uninstall)
-> 启动
+> Byzer Notebook 版本需要 >= 1.2.1 或者 nightly build 版本 
+> 地址： https://download.byzer.org/byzer-notebook/ 
 
 用户需要获取 Byzer Notebook 配置文件 `config/notebook.properties` 中的
-`notebook.security.key`配置, 然后使用 release/byzer-data-as-form-bin 
+`notebook.services.communication.token`配置, 然后使用 release/byzer-data-as-form-bin 
 目录下的 `./bin/gen-token` 脚本进行 Token 生成：
 
 ```
