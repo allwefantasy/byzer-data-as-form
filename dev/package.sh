@@ -8,7 +8,7 @@ then
   exit 1
 fi
 
-DATA_AS_FORM_HOME = `pwd`
+DATA_AS_FORM_HOME=`pwd`
 
 if [[ ! -d deps ]]
 then
