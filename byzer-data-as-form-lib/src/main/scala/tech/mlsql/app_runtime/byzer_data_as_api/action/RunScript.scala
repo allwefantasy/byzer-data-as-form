@@ -1,10 +1,10 @@
 package tech.mlsql.app_runtime.byzer_data_as_api.action
 
+import org.apache.http.client.fluent.{Form, Request}
+import org.apache.http.util.EntityUtils
+
 import java.nio.charset.Charset
 import java.util.UUID
-
-import org.apache.http.client.fluent.{Form, Request}
-
 import scala.collection.mutable
 
 class RunScript(_params: Map[String, String]) {
@@ -81,12 +81,15 @@ class RunScript(_params: Map[String, String]) {
       form.add(k, v)
     }
 
-    val content = Request.Post(DataAsFormService.engineUrl + "/run/script").
+    val resp = Request.Post(DataAsFormService.engineUrl + "/run/script").
       bodyForm(form.build(), Charset.forName("utf-8")).
-      execute().returnContent().asString()
+      execute().returnResponse()
 
-    content
-
+    val c = new String(EntityUtils.toByteArray(resp.getEntity), "utf-8")
+    if (resp.getStatusLine.getStatusCode != 200) {
+      throw new RuntimeException(c)
+    }
+    c
   }
 
 

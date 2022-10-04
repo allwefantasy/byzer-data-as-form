@@ -1,7 +1,9 @@
 package tech.mlsql.app_runtime.byzer_data_as_api.action
 
 import net.csdn.ServiceFramwork
+import net.csdn.common.Base64
 import net.csdn.common.settings.Settings
+import org.apache.commons.compress.utils.IOUtils
 import org.apache.commons.fileupload.FileItem
 import org.apache.commons.io.FileUtils
 import tech.mlsql.app_runtime.byzer_data_as_api.FormService
@@ -75,6 +77,58 @@ object AddNewFormAction {
   def action = "/form/add"
 
   def plugin = PluginItem(AddNewFormAction.action, classOf[AddNewFormAction].getName, PluginType.action, None)
+}
+
+class UploadImageToBase64 extends ActionRequireLogin {
+
+  import UploadImageToBase64._
+
+  override def _run(params: Map[String, String]): String = {
+    val actionContext = ActionContext.context()
+    val items = actionContext.others(ActionContext.Config.formItems).asInstanceOf[java.util.List[FileItem]]
+    if (items.size() != 1) {
+      render(400, ActionHelper.msg("Only support one file to upload"))
+    }
+    val paths = ArrayBuffer[Map[String, String]]()
+    try {
+      items.asScala.filterNot(f => f.isFormField).map {
+        item =>
+          val fileSize = item.getSize
+          if (fileSize > fileMaxSize) {
+            render(400, ActionHelper.msg(s"File size is limited as ${fileMaxSize / 1024 / 1024}m"))
+          }
+          val fileContent = IOUtils.toByteArray(item.getInputStream)
+          val fileStr = Base64.encodeBytes(fileContent)
+          paths += Map("path" -> fileStr)
+      }
+    } catch {
+      case e: Exception =>
+        throw e
+    }
+    JSONTool.toJsonStr(paths)
+  }
+
+  override def _help(params: Map[String, String]): String = JSONTool.toJsonStr(
+    FormParams.toForm(UploadExtensionFields_file.Params).toList.reverse)
+}
+
+object UploadImageToBase64 {
+
+  object Params {}
+
+  def repo = ServiceFramwork.injector.getInstance(classOf[Settings]).get("storage", ".")
+
+  def action = "uploadImageToBase64"
+
+  def fileMaxSize = {
+    val size = ServiceFramwork.injector.getInstance(classOf[Settings]).get("imageSizeLimit", "3m")
+    val targetSize = JavaUtils.byteStringAsBytes(size)
+    targetSize
+  }
+
+  def plugin = PluginItem(UploadImageToBase64.action,
+    classOf[UploadImageToBase64].getName, PluginType.action, None)
+
 }
 
 class UploadExtensionFields_file extends ActionRequireLogin {

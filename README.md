@@ -1,7 +1,9 @@
 # Byzer Data as Form
 
-Byzer Data as Form 是一款集 Form 发布，管理和使用的 产品。
-他的使命是 **Help People Deliver Data Value**。
+Byzer Data as Form 是一款集 Form App 发布，管理和使用的平台。
+
+1. 演示视频： https://www.bilibili.com/video/BV1yB4y1k7VD 
+2. 使命: **Help People Deliver Data Value**。
 
 > [传递数据的价值- Byzer Data-as-Form](https://zhuanlan.zhihu.com/p/516070378)
 

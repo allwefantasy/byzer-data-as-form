@@ -1,6 +1,6 @@
 package tech.mlsql.app_runtime.plugin
 
-import tech.mlsql.app_runtime.byzer_data_as_api.action.{AddNewFormAction, DataAsFormAction, GetSKUWraperAction, ListSKUWrapperAction, UploadExtensionFields_file}
+import tech.mlsql.app_runtime.byzer_data_as_api.action.{AddNewFormAction, DataAsFormAction, GetSKUWraperAction, ListSKUWrapperAction, UploadExtensionFields_file, UploadImageToBase64}
 import tech.mlsql.serviceframework.platform.{Plugin, PluginItem}
 
 /**
@@ -13,7 +13,8 @@ class ByzerDataAsApiPluginDesc extends Plugin {
       AddNewFormAction.plugin,
       ListSKUWrapperAction.plugin,
       GetSKUWraperAction.plugin,
-      UploadExtensionFields_file.plugin
+      UploadExtensionFields_file.plugin,
+      UploadImageToBase64.plugin
     )
   }
 }

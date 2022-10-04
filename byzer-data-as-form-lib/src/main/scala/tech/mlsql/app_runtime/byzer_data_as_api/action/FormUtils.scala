@@ -2,7 +2,7 @@ package tech.mlsql.app_runtime.byzer_data_as_api.action
 
 import net.sf.json.JSONObject
 import tech.mlsql.common.utils.serder.json.JSONTool
-import tech.mlsql.serviceframework.platform.form.{Input, KV, Select}
+import tech.mlsql.serviceframework.platform.form.{Input, KV, Select, Upload}
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
@@ -13,6 +13,8 @@ import scala.collection.mutable.ArrayBuffer
 object FormUtils {
   def toFormField(field: ByzerLangFormField): Product = {
     field.option("formType") match {
+      case "upload" =>
+        Upload(field.key, field.option.getOrElse("action", UploadImageToBase64.action), options = field.option)
       case "input" =>
         //set field1="" where type="defaultParam" and formType="input";
         Input(field.key, "", options = field.option)
