@@ -1,11 +1,13 @@
 # Byzer Data as Form
 
 Byzer Data as Form 是一款集 Form App 发布，管理和使用的平台。
+Byzer Data as Form 的使命是： **Help People Deliver Data Value**。
 
+## 资料
 1. 演示视频： https://www.bilibili.com/video/BV1yB4y1k7VD 
-2. 使命: **Help People Deliver Data Value**。
+2. [传递数据的价值- Byzer Data-as-Form](https://zhuanlan.zhihu.com/p/516070378)
+3. [如何基于 Byzer 使用深度学习快速开发一个图片分类应用](https://zhuanlan.zhihu.com/p/570593147)
 
-> [传递数据的价值- Byzer Data-as-Form](https://zhuanlan.zhihu.com/p/516070378)
 
 ## 在线体验（需要保证外网访问速度）
 
@@ -35,20 +37,42 @@ cd byzer-data-as-form
 
 1. 数据库链接需要改动
 2. admin_token 需要在配置文件里配置，请随机生成一个 UUID。
-3. notebookAccessToken 是为了让该应用能够访问 Byzer Notebook
-4. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接。如果是IP的话，应该是类似这样的配置： `http://192.168.3.14:9111`
-5. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
-6. web.static.dir  配置静态文件的目录。 用户需要将 [web](https://github.com/allwefantasy/ar_runtime_web_console/tree/master/ar_runtime_web_console-lib/src/main/resources/ar_runtime_web_console/web)里的文件拷贝到这个目录里来。  
-7. storage 需要配置一个路径，用于存放 插件文件以及图片文件。 请喝 web.static.dir 保持一致
+3. engineUrl 是指 Byzer-lang 引擎的地址，一般是一个9003端口的地址。
+4. notebookUrl 是 Byzer Notebook 的 Url 地址。
+6. notebookAccessToken 访问 Byzer Notebook 需要一个token。在后续我们会详细介绍如何生成和配置。
+7. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接。如果是IP的话，应该是类似这样的配置： `http://192.168.3.14:9007`
+8. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
+9. web.static.dir  配置静态文件的目录。 用户需要将 [web](https://github.com/allwefantasy/ar_runtime_web_console/tree/master/ar_runtime_web_console-lib/src/main/resources/ar_runtime_web_console/web)里的文件拷贝到这个目录里来。  
+10. storage 需要配置一个路径，用于存放 插件文件以及图片文件。 请和 web.static.dir 保持一致
+
+下面是我本地配置的一个示例：
+
+```yaml
+admin_token: xxxxxx
+engineUrl: "http://xxxxxx:9003"
+notebookUrl: "http://xxxxx:9002"
+notebookAccessToken: "bearer xxxxx"
+domain: "http://xxxxxx:9007"
+storage: "/Users/allwefantasy/web"
+web:
+  static:
+    dir: "file:///Users/allwefantasy/web"
+
+webplatform:
+  user:
+    activate_by_default: true
+```
 
 ### 关于 notebookAccessToken 参数的特别说明
 
 > Byzer Notebook 版本需要 >= 1.2.1 或者 nightly build 版本 
 > 地址： https://download.byzer.org/byzer-notebook/ 
 
+Byzer Data as Form 需要获取脚本内容，这是通过访问 Byzer Notebook 得到的。 
+
 用户需要获取 Byzer Notebook 配置文件 `config/notebook.properties` 中的
-`notebook.services.communication.token`配置, 然后使用 release/byzer-data-as-form-bin 
-目录下的 `./bin/gen-token` 脚本进行 Token 生成：
+`notebook.services.communication.token`配置的值，假设是 `xxxxxxxxxxx`, 
+然后使用 release/byzer-data-as-form-bin 目录下的 `./bin/gen-token` 脚本进行 Token 生成：
 
 ```
 ./bin/gen-token.sh xxxxxxxxxxx
