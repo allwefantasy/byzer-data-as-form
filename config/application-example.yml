@@ -7,7 +7,7 @@ development:
     mysql:
       host: 127.0.0.1
       port: 3306
-      database: byzer_extension_market
+      database: byzer_as_form
       username: xxxxx
       password: xxxxx
       initialSize: 8
@@ -72,14 +72,16 @@ http:
     accept:
       timeout: 43200000
 
-admin_token: xxxxxxxxx
-engineUrl: "http://127.0.0.1:9004"
-notebookUrl: "http://127.0.0.1:9006"
-notebookAccessToken: "bearer xxxx"
-domain: "http://127.0.0.1:3000"
-webplatform:
-  user:
-    activate_by_default: true
+admin_token: xxxxxx
+engineUrl: "http://xxxxxx:9003"
+notebookUrl: "http://xxxxxx:9002"
+notebookAccessToken: "bearer xxxxxx"
+domain: "http://xxxxxx:9007"
+storage: "/Users/allwefantasy/web"
 web:
   static:
     dir: "file:///Users/allwefantasy/web"
+
+webplatform:
+  user:
+    activate_by_default: true
