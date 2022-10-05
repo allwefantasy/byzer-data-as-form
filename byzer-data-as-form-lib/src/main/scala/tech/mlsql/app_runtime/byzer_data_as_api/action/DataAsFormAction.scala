@@ -4,6 +4,7 @@ import net.csdn.ServiceFramwork
 import net.csdn.common.settings.Settings
 import net.sf.json.JSONObject
 import org.apache.http.client.fluent.Request
+import org.apache.http.util.EntityUtils
 import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB
 import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB.ctx
 import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB.ctx._
@@ -129,13 +130,16 @@ object DataAsFormService {
   }
 
   def getNotebookScript(notebookId: String) = {
-    val script = Request.Get(DataAsFormService.notebookUrl + "/api/service/notebook/" + notebookId).
+    val resp = Request.Get(DataAsFormService.notebookUrl + "/api/service/notebook/" + notebookId).
       addHeader("Authorization", DataAsFormService.getNotebookAccessToken).
-      execute().
-      returnContent().
-      asString()
-    val notebook = JSONTool.parseJson[RespWrapper](script)
-    (notebook.data.user, notebook.data.cell_list.map(cell=>convertCellToByzerLang(cell.content)).mkString("\n"))
+      execute().returnResponse()
+
+    val c = new String(EntityUtils.toByteArray(resp.getEntity), "utf-8")
+    if (resp.getStatusLine.getStatusCode != 200) {
+      throw new RuntimeException(c)
+    }
+    val notebook = JSONTool.parseJson[RespWrapper](c)
+    (notebook.data.user, notebook.data.cell_list.map(cell => convertCellToByzerLang(cell.content)).mkString("\n"))
   }
 
   def convertCellToByzerLang(content: String) = {
