@@ -42,7 +42,7 @@ cd byzer-data-as-form
 6. notebookAccessToken 访问 Byzer Notebook 需要一个token。在后续我们会详细介绍如何生成和配置。
 7. domain 默认为 http://market.byzer.org/form，该域名用来生成提供图片链接。如果是IP的话，应该是类似这样的配置： `http://192.168.3.14:9007`
 8. fileSizeLimit: 1m  可以配置上传图片的大小 默认为100m，推荐设置为5m 以内。
-9.  web.static.dir  配置静态文件的目录。 用户需要将项目中 `form` 目录里的内容拷贝到这个指定的目录里。   
+9.  web.static.dir  配置静态文件的目录。 用户需要将项目中 `form` 目录里的内容拷贝到这个指定的目录里。举个例子，假设该选项配置为 /home/william/web, 那么最后的目录结构为  /home/william/web/form   
 10. storage 需要配置一个路径，用于存放 插件文件以及图片文件。 请和 web.static.dir 保持一致
 
 下面是我本地配置的一个示例：
