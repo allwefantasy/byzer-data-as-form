@@ -9,10 +9,6 @@ Byzer Data as Form 的使命是： **Help People Deliver Data Value**。
 3. [如何基于 Byzer 使用深度学习快速开发一个图片分类应用](https://zhuanlan.zhihu.com/p/570593147)
 
 
-## 在线体验（需要保证外网访问速度）
-
-https://byzer.org/form
-
 ## 部署
 
 ### 前置条件
