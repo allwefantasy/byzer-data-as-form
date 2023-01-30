@@ -45,5 +45,8 @@ cp -r ${v}-bin/target/byzer-data-as-api-bin_2.12-${VERSION}.jar release/${v}-bin
 cp dev/*.sh release/${v}-bin/bin
 cp -r form release/${v}-bin/form
 cd release
-tar czvf ${v}-bin.tar.gz ${v}-bin
+tar czvf ${v}-bin-${VERSION}.tar.gz ${v}-bin
 cd -
+
+
+
