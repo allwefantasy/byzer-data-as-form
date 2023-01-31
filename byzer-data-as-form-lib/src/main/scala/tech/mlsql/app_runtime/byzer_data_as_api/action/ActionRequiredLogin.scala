@@ -24,7 +24,7 @@ abstract class ActionRequireLogin extends BaseAction {
       }
 
     } else {
-      render(400, JSONTool.toJsonStr(List(Map("msg" -> "Login or AdminToken is required"))))
+      render(401, JSONTool.toJsonStr(List(Map("msg" -> "Login or AdminToken is required"))))
     }
 
   }
