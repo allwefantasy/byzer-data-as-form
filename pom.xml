@@ -7,7 +7,7 @@
     <groupId>tech.mlsql.serviceframework.baseweb</groupId>
     <artifactId>byzer-data-as-form_2.12</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <modules>
         <module>byzer-data-as-form-lib</module>
         <module>byzer-data-as-form-bin</module>

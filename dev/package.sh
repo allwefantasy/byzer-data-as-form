@@ -10,6 +10,23 @@ fi
 
 DATA_AS_FORM_HOME=`pwd`
 
+if [[ -d deps ]]
+then
+  cd deps
+
+  for item in web-platform app_runtime_with_db user-system ar_runtime_web_console
+  do
+      cd ${item}
+      git pull origin master
+      echo "installing ${item}"
+      cd "$item"
+      mvn -DskipTests  install
+      cd ..
+  done
+  
+  cd ${DATA_AS_FORM_HOME}
+fi
+
 if [[ ! -d deps ]]
 then
   mkdir -p  deps

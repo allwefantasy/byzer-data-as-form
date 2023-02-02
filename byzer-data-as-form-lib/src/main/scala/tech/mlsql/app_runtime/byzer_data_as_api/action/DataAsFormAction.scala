@@ -15,6 +15,9 @@ import tech.mlsql.app_runtime.user.quill_model.{Role, User, UserRole}
 import tech.mlsql.common.utils.serder.json.JSONTool
 import tech.mlsql.serviceframework.platform.form.{FormParams, Input}
 import tech.mlsql.serviceframework.platform.{PluginItem, PluginType}
+import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB.ctx
+import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB.ctx._
+import tech.mlsql.app_runtime.byzer_data_as_api.quill_model.PluginStoreItem
 
 import scala.collection.JavaConverters._
 
@@ -65,6 +68,12 @@ class DataAsFormAction extends ActionRequireLogin {
     if (params.isEmpty) {
       return JSONTool.toJsonStr(FormParams.toForm(DataAsFormAction.Params).toList.reverse)
     }
+
+    if (params.contains("extra.id")) {
+      ctx.run(ctx.query[PluginStoreItem].filter(p => p.id == lift(params("extra.id").toInt)).
+        update(p => p.downloads -> (p.downloads + 1)))
+    }
+
     val canAccess = DataAsFormService.checkAccess(params)
     if (!canAccess.access) {
       render(403, JSONTool.toJsonStr(Map("msg" -> canAccess.msg)))
@@ -232,7 +241,7 @@ object DataAsFormService {
       val teamNames = teams.map(_.name).toSet
       val inTargetTeamRoles = teamRoles.filter(team => teamNames.contains(team._1)).map { team =>
         val role = team._2
-        val roles = getRoles(teams.filter(_ == team._1).head.teamId).map(_.name).toSet
+        val roles = getRoles(teams.filter(_.name == team._1).head.teamId).map(_.name).toSet
         roles.contains(role)
       }.size > 0
 
