@@ -19,7 +19,6 @@ then
       cd ${item}
       git pull origin master
       echo "installing ${item}"
-      cd "$item"
       mvn -DskipTests  install
       cd ..
   done
@@ -62,7 +61,8 @@ cp -r ${v}-bin/target/byzer-data-as-api-bin_2.12-${VERSION}.jar release/${v}-bin
 cp dev/*.sh release/${v}-bin/bin
 cp -r form release/${v}-bin/form
 cd release
-tar czvf ${v}-bin-${VERSION}.tar.gz ${v}-bin
+mv ${v}-bin ${v}-bin-${VERSION}
+tar czvf ${v}-bin-${VERSION}.tar.gz ${v}-bin-${VERSION}
 cd -
 
 
