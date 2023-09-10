@@ -3,11 +3,14 @@ if [ -z $BYZER_FORM_HOME ];then
    export BYZER_FORM_HOME=$(cd -P -- "$(dirname -- "$0")"/../ && pwd -P)
 fi
 
-cd BYZER_FORM_HOME
+echo "BYZER_FORM_HOME: ${BYZER_FORM_HOME}"
+
+cd $BYZER_FORM_HOME
 
 if [[ -f pid ]];then
   echo "Byzer Form is running, stop it first"
   kill -9 `cat pid`
+  rm -rf pid
 fi
 
 sleep 3
