@@ -68,12 +68,6 @@ mv ${v}-bin ${v}-bin-${VERSION}
 tar czvf ${v}-bin-${VERSION}.tar.gz ${v}-bin-${VERSION}
 cd -
 
-#TIME=$(date +%F)
-#if [[ "${UPLOAD}" == "true" ]];then
-#  curl \
-#    -F "byzer-data-as-form-bin-${VERSION}.tar.gz=@/Users/allwefantasy/projects/byzer-data-as-form/release/byzer-data-as-form-bin-${VERSION}.tar.gz" \
-#  "${BYZER_UPLOADER_URL}&pathPrefix=latest/${TIME}"
-#fi
 
 
 
