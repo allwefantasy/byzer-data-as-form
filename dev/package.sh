@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 v=${1:-byzer-data-as-form}
+GIT_REPO=${GIT_REPO:-gitee"}
 
 if [[ "${v}" == "" ]]
 then
@@ -17,7 +18,8 @@ then
   for item in web-platform app_runtime_with_db user-system ar_runtime_web_console
   do
       cd ${item}
-      # git pull origin master
+      # get the master/main branch code
+      git pull origin master
       echo "installing ${item}"
       mvn -DskipTests  install
       cd ..
@@ -33,8 +35,8 @@ then
 
   for item in web-platform app_runtime_with_db user-system ar_runtime_web_console
   do
-      echo "clone https://github.com/allwefantasy/${item}"
-      git clone https://github.com/allwefantasy/${item}
+      echo "clone https://${GIT_REPO}.com/allwefantasy/${item}"
+      git clone https://${GIT_REPO}.com/allwefantasy/${item}
       echo "installing ${item}"
       cd "$item"
       mvn -DskipTests  install

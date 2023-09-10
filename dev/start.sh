@@ -13,3 +13,5 @@ sleep 3
 PID=$(cat ${BYZER_FORM_HOME}/pid)
 CUR_DATE=$(date "+%Y-%m-%d %H:%M:%S")
 echo $CUR_DATE" new Byzer Form process pid is "$PID >> ${BYZER_FORM_HOME}/logs/serviceframework-0.log
+
+

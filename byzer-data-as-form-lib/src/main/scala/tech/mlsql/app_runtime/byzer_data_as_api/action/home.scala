@@ -6,16 +6,17 @@ import net.csdn.common.settings.Settings
 import org.apache.commons.compress.utils.IOUtils
 import org.apache.commons.fileupload.FileItem
 import org.apache.commons.io.FileUtils
-import tech.mlsql.app_runtime.byzer_data_as_api.FormService
+import tech.mlsql.app_runtime.byzer_data_as_api.{ContextService, FormService}
 import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB.ctx
 import tech.mlsql.app_runtime.byzer_data_as_api.PluginDB.ctx._
+import tech.mlsql.app_runtime.byzer_data_as_api.action.DeleteFormAction.Params
 import tech.mlsql.app_runtime.byzer_data_as_api.quill_model.{ByzerPluginType, PluginStoreItem}
 import tech.mlsql.app_runtime.user.action.{ActionHelper, UserService}
 import tech.mlsql.common.utils.distribute.socket.server.JavaUtils
 import tech.mlsql.common.utils.path.PathFun
 import tech.mlsql.common.utils.serder.json.JSONTool
 import tech.mlsql.serviceframework.platform.action.ActionContext
-import tech.mlsql.serviceframework.platform.form.{FormParams, Input, Upload}
+import tech.mlsql.serviceframework.platform.form.{Dynamic, FormParams, Input, KV, Select, Upload}
 import tech.mlsql.serviceframework.platform.{PluginItem, PluginType}
 
 import java.io.File
@@ -64,6 +65,67 @@ class AddNewFormAction extends ActionRequireLogin {
     JSONTool.toJsonStr(FormParams.toForm(AddNewFormAction.Params).toList.reverse)
   }
 }
+
+
+class ListFormActionByUser extends BaseAction {
+  override def _run(params: Map[String, String]): String = {
+    val userName = getUserName(params)
+    val items = ctx.run(ctx.query[PluginStoreItem].filter(_.userName == lift(userName)))
+    val finalResult = items.map(item => FormService.toExtensionItem(item)).toList
+    JSONTool.toJsonStr(finalResult)
+  }
+
+  override def _help(params: Map[String, String]): String = {
+    JSONTool.toJsonStr(FormParams.toForm(ListFormActionByUser.Params).toList.reverse)
+  }
+}
+
+object ListFormActionByUser {
+  object Params {
+
+  }
+
+  def action = "/user/form/list"
+
+  def plugin = PluginItem(ListFormActionByUser.action, classOf[ListFormActionByUser].getName, PluginType.action, None)
+}
+
+
+class DeleteFormAction extends BaseAction {
+  override def _run(params: Map[String, String]): String = {
+
+    val userName = getUserName(params)
+    val formName = params(Params.FORM_NAME.name)
+    ctx.run(ctx.query[PluginStoreItem].filter(_.userName == lift(userName)).filter(_.name == lift(formName)).delete)
+    JSONTool.toJsonStr(Map("msg" -> s"Delete ${formName} success"))
+  }
+
+  override def _help(params: Map[String, String]): String = {
+    val userName = getUserName(params)
+    ContextService.setContext(ContextService(userName = userName))
+    JSONTool.toJsonStr(FormParams.toForm(DeleteFormAction.Params).toList.reverse)
+  }
+}
+
+object DeleteFormAction {
+  object Params {
+    val FORM_NAME = Select("formName", List(), valueProvider = Option(() => {
+      val userName = ContextService.getContextUserName
+      new ListFormActionByUser()._run(Map(
+        UserService.Config.USER_NAME -> userName
+      )) match {
+        case s: String =>
+          val items = JSONTool.parseJson[List[ExtensionItem]](s)
+          items.map(item => KV(Option(item.name), Option(item.name)))
+      }
+    }), options = Map("label" -> "Form Name"))
+  }
+
+  def action = "/form/delete"
+
+  def plugin = PluginItem(DeleteFormAction.action, classOf[DeleteFormAction].getName, PluginType.action, None)
+}
+
 
 object AddNewFormAction {
   object Params {
