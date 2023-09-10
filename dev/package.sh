@@ -15,7 +15,7 @@ if [[ -d deps ]]
 then
   cd deps
 
-  for item in web-platform app_runtime_with_db user-system ar_runtime_web_console
+  for item in ServiceFramework web-platform app_runtime_with_db user-system ar_runtime_web_console
   do
       cd ${item}
       # get the master/main branch code
@@ -33,7 +33,7 @@ then
   mkdir -p  deps
   cd deps
 
-  for item in web-platform app_runtime_with_db user-system ar_runtime_web_console
+  for item in ServiceFramework web-platform app_runtime_with_db user-system ar_runtime_web_console
   do
       echo "clone https://${GIT_REPO}.com/allwefantasy/${item}"
       git clone https://${GIT_REPO}.com/allwefantasy/${item}
