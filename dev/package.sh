@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 v=${1:-byzer-data-as-form}
-GIT_REPO=${GIT_REPO:-gitee"}
+GIT_REPO=${GIT_REPO:-gitee}
 
 if [[ "${v}" == "" ]]
 then
