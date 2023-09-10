@@ -38,7 +38,7 @@ then
       echo "clone https://${GIT_REPO}.com/allwefantasy/${item}"
       git clone https://${GIT_REPO}.com/allwefantasy/${item}
       echo "installing ${item}"
-      cd "$item"
+      cd $item
       mvn -DskipTests  install
       cd ..
   done
